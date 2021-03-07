@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add and Remove</title>
+    <style>
+        body{margin:0;padding:0;background-color:#313131}
+        .wrapper{max-width:800px;margin:60px auto}
+        .addItem input{width:87%;border:1px solid #ddd;height:50px;padding:0 15px}
+        .addItem button{background-color:#fff;border:1px solid #ddd;height:54px;width:8%;cursor: pointer;}
+        .createItem{color:#f9f9f9}
+        .createList li{font-size:18px;border:1px solid #ddd;padding:8px;margin: 10px 0}
+        .createList li button{margin-left:15px;height:40px;cursor: pointer}
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="addItem">
+            <input type="text" placeholder="Add your item...">
+            <button>Add +</button>
+        </div>
+        <div class="createItem">
+            <ol class="createList"></ol>
+        </div>
+    </div>
+
+    <script>
+        const input = document.querySelector('input');
+        const addBtn = document.querySelector('.addItem > button');
+
+        function addlListItems() {
+            const createList = document.querySelector('.createList');;
+
+            const createLi = document.createElement('li');
+            const removeMe = document.createElement('button');
+            removeMe.textContent = 'Remove me';
+            if(input.value !== '') {
+                createLi.textContent = input.value;
+                input.value = '';
+                createList.appendChild(createLi);
+                createLi.appendChild(removeMe);
+            }
+
+            removeMe.addEventListener('click', function() {
+                const parent = this.parentNode;
+                parent.remove();
+            })
+            
+        }
+
+        addBtn.addEventListener('click', addlListItems);
+        input.addEventListener('keyup', (e)=>{
+            (e.keyCode === 13) ? addlListItems(e) : null;
+        })
+
+        // console.log(addlListItems)
+    </script>
+    <script src="index.js"></script>
+</body>
+</html>
